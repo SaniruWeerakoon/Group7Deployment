@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://blood-donation-system-client.onrender.com",
+  "homepage": "https://blood-donation-system-client.onrender.com/home",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
