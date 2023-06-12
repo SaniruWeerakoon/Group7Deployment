@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "/<Group7Deployment>/#",
+  "homepage": "https://github.com/SaniruWeerakoon/Group7Deployment.git",
   "scripts": {
     "install-server": "cd backend && npm install",
     "start-server": "cd backend && node server.js",

@@ -39,7 +39,9 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("Mongodb Connection Success ");
 });
-
+app.get("/", (req, res) => {
+  res.status(201).json({message: "Connected to Backend!"});
+});
 const donorRouter = require("./routes/donors.js");
 app.use("/Donor", donorRouter);
 

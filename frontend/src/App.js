@@ -22,10 +22,10 @@ function App() {
       <Route exact path='/'>
       <Navigation user={UserTypes.DONOR} />
       </Route>
-      <Route path='/home'>
+      <Route path='#/home'>
          <HomePage/>
       </Route>
-      <Route path='/FAQs'>
+      <Route path='#/FAQs'>
          <FAQs/>
       </Route>
       <Route path='/location1'>
