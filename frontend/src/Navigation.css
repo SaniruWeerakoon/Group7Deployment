@@ -1,0 +1,176 @@
+.donorIcon,.adminIcon,.hospitalIcon,.bloodBankIcon
+{ padding:20px;
+   width: 35%; 
+   height: 20%;
+   margin-left: 30%;
+   margin-bottom:2%;
+   margin-top:-25px;
+    border-radius: 100%; }
+
+.donorIcon
+    { background-image: linear-gradient(to bottom, #ff9900,#ff4107); }
+
+.adminIcon
+    { background-image: linear-gradient(to bottom,#b2bfc5, #685e5c); }
+
+.hospitalIcon
+    { background-image: linear-gradient(to bottom, #aef9da,#00b6b6); }
+
+.bloodBankIcon
+    { background-image: linear-gradient(to bottom, #fb5b5b,#e8000c)}
+    
+.hospitalIcon{
+  width: 35%; 
+  height: 25%;
+}
+.bloodBankIcon{
+  width:35%;
+  height:25%;
+}
+
+.link,.sidelink{
+  padding:0 0px ;
+  background-color:none ;
+  font:12px;
+  color:rgb(0, 0, 0) ;
+  text-decoration: none ;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px; 
+  font-size: 12px;
+  
+}
+
+
+.link i,.sidelink i {
+  margin-right: 18px; 
+}
+
+.lists {
+  text-decoration: none ;
+  color: rgb(5, 5, 5);
+  list-style-type: none;
+  padding: 8px;
+}
+
+.sublists {
+  text-decoration: none ;
+  color: rgb(5, 5, 5);
+  list-style-type: none;
+}
+
+.link:hover{
+  text-decoration: none ;
+  background-color: transparent;
+  color: rgb(205, 196, 196);
+}
+
+
+.subnav{
+  color:white;
+  font-size:10px;
+  margin-left:15px;
+}
+
+.navhr {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100%;
+}
+
+
+.sidebar {
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  transition: transform 0.3s ease;
+  transform: translateX(-200px);
+  background-color:whitesmoke;
+  opacity:5;
+  display: flex;
+  flex-direction: column; 
+  z-index: 100;
+}
+
+.sidebar-toggle {
+  display:none;
+  position: fixed;
+  transition: transform 0.3s ease;
+  font-size:xx-large;
+  margin-left:5%;
+  margin-top:1%;
+  background-color: transparent;
+  border: none;
+}
+
+.sidebar-toggle:hover{
+  color:rgb(56, 55, 55);
+}
+
+.sidebar-toggle.active {
+  transform: translateX(200px); 
+}
+
+.sidebar {
+  position: fixed;
+  margin-top:0%;
+  padding-top:5%;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  transition: transform 0.3s ease;
+  transform: translateX(-200px); 
+}
+
+.sidebar.active {
+  transform: translateX(0); 
+  opacity:15;
+  width:220px;
+}
+
+.myac{
+  color:rgb(0, 0, 0);
+  font-size:17px;
+  margin-top:10%;
+  margin-bottom:25%;
+  margin-left: 40px;
+}
+
+.OptionLoginAndSignUp {
+  background-color: white;
+  border: 1.3px solid #ccc;
+  border-radius: 25px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 35px;
+  border-top:solid rgb(166, 165, 165) 1.5px;
+  padding-left: 10%;
+  padding-top: 7%;
+  padding-bottom: 7%;
+  margin-bottom: 5%;
+  margin-top:1%;
+}
+
+.optionsLink{
+  font-size:12px;
+  text-decoration: none ;
+  padding-left: 5px; 
+  color:rgb(0, 0, 0) ;
+}
+
+.optionsLink i{
+  margin-right: 18px;
+}
+  
+@media only screen and (max-width: 840px) {
+  .sidebar-toggle {
+   display:block;
+   margin-top:-12%;
+  }
+
+}

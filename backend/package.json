@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Blood donation system backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Group 7",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "cryptr": "^6.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.3.0",
+    "mongoose": "^7.0.4",
+    "nodemon": "^2.0.22",
+    "cookie-parser": "^1.4.6",
+    "jsonwebtoken": "^9.0.0"
+  }
+}

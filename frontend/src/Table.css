@@ -1,0 +1,268 @@
+
+.tablemain {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    width:100%;
+    margin-top:1px;
+    border-radius:50px;
+    margin-left:80px;
+ 
+  }
+
+  
+.tablecover{
+  width:80%;
+  margin-left:12%;
+  height:auto;
+  margin-top:5%;
+
+}
+
+.dropdown6{
+  width:69px;
+  padding:2px;
+  height: 30px;
+  border:1.5px solid black;
+  border-radius:5px;
+}
+
+.tablename{
+    margin-left:50%;
+    margin-top:2%;
+    margin-bottom:1%;
+    font-size:18px;
+    color:rgb(5, 5, 5);
+    font-weight:700;
+}
+
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    font-size:15px; 
+    font-weight: 600;
+}
+  
+table input[type="text"] {
+    width:100%;
+    padding:5px;
+    border: 1.5px solid rgb(0, 0, 0);
+}
+
+table input[type="number"] {
+    width:80px;
+    border-radius: 5px;
+    padding:5px;
+    border: 1.5px solid rgb(0, 0, 0);
+}
+
+table textarea{
+  border: 1.5px solid rgb(0, 0, 0);
+  border-radius: 5px;
+}
+
+.submitbutton{
+    color: rgb(255, 255, 255);
+    border-radius:5px;
+    border: 2px solid rgb(0, 0, 0);
+    padding:8px;
+    width:100%;
+    background-color: black;
+    margin-top:2%;
+}
+
+.inputnum{
+  width:52px;
+}
+
+.submit2{
+  margin-left:85%;
+  margin-top:3px;
+  color: rgb(255, 255, 255);
+  border-radius:22px;
+  border: 2px solid rgb(0, 0, 0);
+  padding:8px;
+  width:200px;
+  background-color: black;
+  font-size:15px;
+}
+.submitbutton:hover {
+    background-color: gray;
+    color: white;
+  }
+
+
+.norows{
+margin-left:100%;
+  width:120%;
+}
+
+th {
+    color:#9f9d9d;
+    font-size:14px;  
+    font-weight:500;
+    border-radius: 5px; 
+  }
+
+.dropdown3{
+  background-color:white;
+  width:70%;
+  height:45px;
+  border-right:2px solid lightgrey;
+  padding:8px;
+  margin-left:0px;
+}
+.row-container {
+  display: flex;
+  width:98%;
+  margin-left:8.9%;
+  align-items: center; 
+  background-color: rgb(255, 255, 255);
+  border:2px solid rgb(220, 220, 220); 
+}
+
+.dropdown5{
+  margin-left: 1px;
+  border-right:1.5px solid grey;
+  height:40px;
+  padding:7px;
+  width:2000px;
+}
+.dropdown4{
+  height:40px;
+  padding:7px;
+  margin-left: 2px;
+  border-right:1.5px solid grey;
+  width:2000px;
+}
+
+.submit3{
+  margin-left: 1px;
+  color: rgb(0, 0, 0);
+  border-radius:0px;
+  border: none;
+  padding:3px;
+  margin-top:0px;
+  width:600px;
+  height: 44px;
+  background-color: rgb(255, 255, 255);
+  font-size:15px;
+}
+.submit3:hover{
+  background-color: rgb(203, 203, 203);
+}
+
+
+.submit2 {
+  margin-right: -300px; 
+  color: rgb(0, 0, 0);
+  border-radius:0px;
+  border: none;
+  padding:3px;
+  margin-top:0px;
+  width:300px;
+  height: 44px;
+  background-color: rgb(255, 255, 255);
+  font-size:15px;
+}
+
+.submit2:hover{
+background-color: rgb(203, 203, 203);
+}
+
+
+tr:nth-child(even) {
+    background-color:rgb(255, 255, 255);
+    border: 10px solid whitesmoke;
+  
+   
+}
+
+  
+tr:nth-child(odd) {
+    background-color:rgb(255, 255, 255);
+    border: 10px solid whitesmoke;
+    
+}
+
+
+.search{
+    width:35%;
+    border: 1.5px solid #d3d3d3;
+    border-radius: 5px;
+    height:40px;
+    padding:12px;
+    margin-bottom: 10px;
+    margin-left: 90px;
+    background-color: #ffffff;
+}
+
+.search:focus{
+outline:none;
+}
+
+.acceptAndDeclineBtn{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap:10%;
+}
+.acceptAndDeclineBtn>div{
+    flex-basis: 100px;
+}
+  
+.acceptBtn,.declineBtn{
+    width:100%;
+    border:none;
+    border-radius:50px;
+    font-weight:500;
+    height:33px;
+}
+.acceptBtn:hover,.declineBtn:hover{
+    background-color: rgb(71, 71, 71);
+    color:rgb(255, 255, 255);
+}
+
+.acceptBtn{
+  background-color: rgb(82, 218, 198);
+}
+
+.declineBtn{
+  background-color: rgb(244, 121, 99);
+}
+
+.dropdowncover{
+  background-color:white;
+  width:98%;
+  height:50px;
+  border:2px solid lightgrey;
+  margin-left:90px;
+}
+
+
+@media only screen and (max-width: 840px) {
+
+    .row-container{
+      margin-left:18%;
+    }
+
+    .submit2{
+      width:20px;
+    }
+    .tablename{
+      margin-top: 20%;
+      width: 100%;
+      font-size: 18px;
+      margin-left:3%;
+    }
+    .tablecover{
+      margin-left:-17%;
+      width:100%;
+  }
+}
+  @media only screen and (max-width: 320px) {
+
+  }
+ 
+  
+  

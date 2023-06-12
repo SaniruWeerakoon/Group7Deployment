@@ -1,0 +1,149 @@
+.loginAndSingupContainer{
+  display: flex;
+  height:100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  color:rgb(74, 74, 74)
+}
+
+.loginAndSignupSide{
+  background-color: rgb(245, 139, 0);
+  width:18%;
+}
+
+.loginContainer{
+  flex:4;
+  background-color:rgb(255, 255, 255);
+  margin-left:25%;
+  margin-right:25%;
+  padding-top:1.5%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ }
+
+ .loginAndSingUpLine{
+  border:solid black 1px;
+ }
+
+.signupContainer{
+  flex:4;
+  margin-left:10%;
+  margin-right:10%;
+  background-color: white;
+  padding-top:1.5%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.loginandsingupheading{
+  text-align: center;
+ }
+.signupForm{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top:2%;
+  background-color: white;
+}
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+ }
+
+.signupformRows{
+  flex-basis: calc(50% - 10px); 
+  margin-bottom: 10px; 
+}
+
+.loginformRows{
+  width:100%;
+  margin-bottom:10px;
+  margin-top:10px;
+}
+.error{
+  color:rgb(254, 102, 55);
+  text-align: left;
+  font-size: 14px;
+  font-weight:500;
+}
+.errorContainer{
+  min-height:15px;
+  margin-left: 11%;
+  width:84%;
+}
+
+.genderContainer{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  margin-left:11%;
+  padding-top:2px;
+  padding-left:5px;
+  border:none;
+  border-bottom:solid grey 1.5px; 
+  width:80%;
+  padding-bottom:1.5%;
+  transition: background-color 0.3s ease-in-out; 
+}
+
+.genderLabel{
+  margin-right:8px;
+}
+
+.formInputBox{
+  width:80%;
+  padding-left:5px;
+  padding-right:10px;
+  margin-left:10%;
+  padding-top:6px;
+  padding-bottom:6px;
+  border:none;
+  border-bottom:solid grey 1.5px;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.3s ease-in-out; 
+}
+
+.formInputBox:hover{
+
+ background-color: rgba(148, 215, 249, 0.422);
+ border-radius: 2px;
+}
+.formInputBox:focus{
+  outline: none; 
+}
+.formLabel{
+  text-align: left;
+  margin-left: 11%;
+  font-weight: 400;
+  
+  
+}
+.signupBtn,.loginBtn{
+  background-color: rgb(71, 70, 70);
+  color:white;
+  font-weight:500;
+  padding:10px;
+  border:none;
+  border-radius:50px;
+}
+.signupBtn:hover,.loginBtn:hover{
+  background-color: rgb(162, 162, 162);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color:rgb(0, 0, 0);
+  
+}
+.signupBtn{
+  width:200px;
+  margin-top:1.5%;
+  margin-bottom:2%;
+}
+.loginBtn{
+  width:60%;
+  margin-top:4%;
+  margin-bottom:4%;
+  margin-left: 1%;
+ }
+
+
