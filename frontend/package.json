@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://github.com/SaniruWeerakoon/Group7Deployment.git",
+  "homepage": "https://blood-donation-system-client.onrender.com",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
