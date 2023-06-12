@@ -1,5 +1,5 @@
 
-import {BrowserRouter as Router, Route} from "react-router-dom"
+import {HashRouter as Router, Route} from "react-router-dom"
 import Navigation from './Navigation';
 import LoginAndSignUp from './LoginAndSignUp';
 import HomePage from "./HomePage";

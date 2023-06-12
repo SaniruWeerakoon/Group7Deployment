@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "/<Group7Deployment>/#",
   "scripts": {
     "install-server": "cd backend && npm install",
     "start-server": "cd backend && node server.js",
