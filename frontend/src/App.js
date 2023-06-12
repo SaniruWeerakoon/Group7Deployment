@@ -1,5 +1,5 @@
 
-import {HashRouter as Router, Route} from "react-router-dom"
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import Navigation from './Navigation';
 import LoginAndSignUp from './LoginAndSignUp';
 import HomePage from "./HomePage";
@@ -11,21 +11,20 @@ import BloodCountChart from './BloodCountChart';
 import { UserTypes } from "./utils/Enums";
 import { TableNames } from "./utils/Enums";
 import { FormNames } from "./utils/Enums";
-import { HashRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 export const Backend_URL="https://blood-donation-system-btsr.onrender.com"
 
 function App() {
   return (
-    <HashRouter>
+   
     <Router>
       <Route exact path='/'>
       <Navigation user={UserTypes.DONOR} />
       </Route>
-      <Route path='#/home'>
+      <Route path='/home'>
          <HomePage/>
       </Route>
-      <Route path='#/FAQs'>
+      <Route path='/FAQs'>
          <FAQs/>
       </Route>
       <Route path='/location1'>
@@ -113,7 +112,6 @@ function App() {
       </Route>
     </Router>
 
-    </HashRouter>
   )
 }
 
