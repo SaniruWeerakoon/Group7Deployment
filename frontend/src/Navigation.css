@@ -59,12 +59,12 @@
   color: rgb(5, 5, 5);
   list-style-type: none;
 }
-
+/*
 .link:hover{
   text-decoration: none ;
   background-color: transparent;
-  color: rgb(205, 196, 196);
-}
+  color: rgb(135, 135, 135);
+}*/
 
 
 .subnav{

@@ -84,19 +84,20 @@ router.route("/verify").post(
         return res.json({ status: false });
       } else {
         const Admin = await admin.findById(data.id);
-        const pendingBanks = await pendingbloodBank.count();
-        const pendingHosps = await pendinghospital.count();
-        const Hosps = await hospital.count();
-        const Banks = await bloodBank.count();
-        const obj = {
-          username: Admin.username,
-          pendingBanks,
-          pendingHosps,
-          Hosps,
-          Banks,
-        };
-        if (Admin) return res.json({ status: true, user: obj });
-        else return res.json({ status: false });
+        if (Admin) {
+          const pendingBanks = await pendingbloodBank.count();
+          const pendingHosps = await pendinghospital.count();
+          const Hosps = await hospital.count();
+          const Banks = await bloodBank.count();
+          const obj = {
+            username: Admin.username,
+            pendingBanks,
+            pendingHosps,
+            Hosps,
+            Banks,
+          };
+          return res.json({ status: true, user: obj });
+        } else return res.json({ status: false });
       }
     });
   })

@@ -15,15 +15,11 @@ app.listen(PORT, () => {
 });
 
 const corsConfig = {
-  origin: true,
+  origin: "http://localhost:3000", // frontend URL (ReactJS)
   credentials: true,
 };
-const corsOptions = {
-  origin: "http://localhost:3000" // frontend URI (ReactJS)
-}
-app.use(cors(corsOptions));
 app.use(cors(corsConfig));
-app.options("*", cors(corsConfig));
+app.options(" ", cors(corsConfig));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
@@ -40,7 +36,7 @@ connection.once("open", () => {
   console.log("Mongodb Connection Success ");
 });
 app.get("/", (req, res) => {
-  res.status(201).json({message: "Connected to Backend!"});
+  res.status(201).json({ message: "Connected to Backend!" });
 });
 const donorRouter = require("./routes/donors.js");
 app.use("/Donor", donorRouter);

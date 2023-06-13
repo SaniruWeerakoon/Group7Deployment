@@ -13,6 +13,7 @@ import { UserTypes } from "./utils/Enums";
 import { TableNames } from "./utils/Enums";
 import { FormNames } from "./utils/Enums";
 
+// export const Backend_URL="http://localhost:8070"
 export const Backend_URL="https://blood-donation-system-btsr.onrender.com"
 
 function App() {
@@ -45,28 +46,28 @@ function App() {
       </Route>
 
       <Route path='/donorLoginPage'>
-         <LoginAndSignUp  page={FormNames.DONOR_LOGIN}/>
+         <LoginAndSignUp  page={FormNames.DONOR_LOGIN} user={UserTypes.DONOR}/>
       </Route>
       <Route path='/donorSignUpPage'>
          <LoginAndSignUp page={FormNames.DONOR_SIGNUP}/>
       </Route>
       <Route path='/adminLoginPage'>
-          <LoginAndSignUp  page={FormNames.ADMIN_LOGIN}/>
+          <LoginAndSignUp  page={FormNames.ADMIN_LOGIN}  user={UserTypes.ADMIN}/>
       </Route>
       <Route path='/adminSignUpPage'>
           <LoginAndSignUp page={FormNames.ADMIN_SIGNUP}/>
       </Route>
       <Route path='/hospitalLoginPage'>
-          <LoginAndSignUp  page={FormNames.HOSPITAL_LOGIN}/>
+          <LoginAndSignUp  page={FormNames.HOSPITAL_LOGIN}  user={UserTypes.HOSPITAL}/>
       </Route>
       <Route path='/hospitalSignUpPage'>
          <LoginAndSignUp page={FormNames.HOSPITAL_SIGNUP}/>
       </Route>
       <Route path='/bloodBankLoginPage'>
-         <LoginAndSignUp  page={FormNames.BLOODBANK_LOGIN}/>
+         <LoginAndSignUp  page={FormNames.BLOODBANK_LOGIN} user={UserTypes.BLOODBANK}/>
       </Route>
       <Route path='/bloodBankSignUpPage'>
-         <LoginAndSignUp page={FormNames.BLOODBANK_SIGNUP}/>
+         <LoginAndSignUp page={FormNames.BLOODBANK_SIGNUP} />
       </Route>
 
       <Route path='/donorHistory'>

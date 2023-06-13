@@ -29,13 +29,13 @@ import { InputType ,InputFieldName } from "./utils/Enums";
       type: InputType.TEXT, label: "Username",
       placeholder: "Enter Username"
     };
-  // export const genderField = 
-  //   { name: InputFieldName.GENDER,
-  //     type: InputType.RADIO,
-  //     label: "Gender", 
-  //     placeholder: "Gender",
-  //     options: ["Male", "Female"],
-  //   };
+  export const genderField = 
+    { name: InputFieldName.GENDER,
+      type: InputType.RADIO,
+      label: "Gender", 
+      placeholder: "Gender",
+      options: ["Male", "Female"],
+    };
   export const birthDateField = 
     { name: InputFieldName.BIRTHDATE, 
       type: InputType.DATE, 
@@ -52,12 +52,12 @@ import { InputType ,InputFieldName } from "./utils/Enums";
     label: "Telephone Number",
     placeholder: "Enter Telephone Number"
   };
-  // export const donorAddressField = 
-  // { name: InputFieldName.DONORADDRESS,
-  //   type: InputType.TEXTAREA, 
-  //   label: "Address",  
-  //   placeholder: "Enter Address"
-  // };
+  export const donorAddressField = 
+  { name: InputFieldName.DONORADDRESS,
+    type: InputType.TEXTAREA, 
+    label: "Address",  
+    placeholder: "Enter Address"
+  };
   export const addressField = 
   { name: InputFieldName.ADDRESS, 
     type: InputType.TEXTAREA, 
@@ -81,3 +81,27 @@ import { InputType ,InputFieldName } from "./utils/Enums";
     label: "Password", 
     placeholder: "Enter Password" 
   };
+export const name =
+{
+  label:'NAME',
+  icon:'fas fa-user',
+  value:'0'
+};
+export const dateofbirth =
+{
+  label:'DATE OF BIRTH',
+  icon:'fas fa-calendar-alt',
+  value:'0'
+};
+export const telephone=
+{
+  label:'TELEPHONE',
+  icon:'fa fa-phone',
+  value:'0'
+};
+export const address= 
+{
+  label:"ADDRESS",
+  icon:'fas fa-map-marker-alt',
+  value:'0'
+};

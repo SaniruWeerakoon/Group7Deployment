@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Table.css";
 import Dropdown from "./Dropdown";
-import { TableNames } from "./utils/Enums";
+import { TableNames, Routes } from "./utils/Enums";
 import { DropDown } from "./utils/Enums";
 import { validateForm, validateField } from "./Validation";
 import axios from "axios";
-
 import { Backend_URL } from "./App";
 
-
 function Table({ tableName }) {
+  const [value, setValue] = useState("");
   const [id, setId] = useState([]);
   const [name, setName] = useState([]);
   const [NIC, setNIC] = useState([]);
@@ -22,7 +21,23 @@ function Table({ tableName }) {
   const [pHospitals, setpHospitals] = useState([]);
   const [Hospitals, setHospitals] = useState([]);
   const [BloodBanks, setBloodBanks] = useState([]);
-  const user = "admin";
+  const [date, setDate] = useState([]);
+  const [pint, setPint] = useState([]);
+  const [type, setType] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  let user = "";
+  if (tableName == TableNames.DONORHISTORY) {
+    user = Routes.donation;
+  } else if (
+    tableName == TableNames.DONORLOCATION ||
+    tableName == TableNames.BLOODBANKSEARCH
+  ) {
+    user = Routes.bloodBank;
+  } else {
+    user = Routes.admin;
+  }
+
   console.log("test " + name);
 
   useEffect(() => {
@@ -78,6 +93,8 @@ function Table({ tableName }) {
       });
     }
   }, []);
+  console.log("test " + name);
+  console.log("test2 " + type, date, pint);
 
   ///////
   const [inputValueArray, setInputValueArray] = useState([]);
@@ -86,81 +103,34 @@ function Table({ tableName }) {
     bloodtypedropdown: "",
     districtdropdown: "",
   });
-
   const handleDropdownChange = (event, dropdownName) => {
-    const value = event.target.value;
+    const selectedValue = event.target.value;
     setDropdownValues((prevState) => ({
       ...prevState,
       [dropdownName]: value,
     }));
+    setValue(selectedValue);
   };
 
-  const bloodTypeValue = dropdownValues.bloodtypedropdown;
-  const districtValue = dropdownValues.districtdropdown;
-
-  function deletebtn(e) {
+  function locationHandle(e, value) {
     e.preventDefault();
-    axios
-      .delete(`http://localhost:8070/bloodBank/delete/${id}`)
-      .then(() => {
-        alert("Deleted successfully");
-        window.location.reload();
-      })
-      .catch((error) => {
-        alert("Deletion unsuccessful");
-        console.log(error);
-      });
-  }
+    console.log("district " + value);
+    axios.get(`http://localhost:8070/${user}/`).then((response) => {
+      const responseData = response.data;
+      const filteredData = responseData.filter(
+        (item) => item.district === value
+      );
+      const districts = filteredData.map((item) => item.district);
+      const names = filteredData.map((item) => item.name);
+      const telephones = filteredData.map((item) => item.telephone);
+      const locations = filteredData.map((item) => item.address);
 
-  function acceptbtn(
-    e,
-    name,
-    telephone,
-    location,
-    username,
-    password,
-    district,
-    id,
-    check
-  ) {
-    let user2 = "";
-    let user3 = "";
-    if (check == 1) {
-      user2 = "confirmedBloodBank";
-      user3 = "bloodBank";
-    } else {
-      user2 = "confirmedHospital";
-      user3 = "hospital";
-    }
-    e.preventDefault();
-    const newBank = {
-      name,
-      telephone,
-      address: location,
-      username,
-      password,
-      district,
-    };
-    axios
-      .post(`http://localhost:8070/${user2}/add`, newBank)
-      .then(() => {
-        alert("confirmedBloodBank added to the database");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    axios
-      .delete(`http://localhost:8070/${user3}/delete/${id}`)
-      .then(() => {
-        alert("Deleted successfully");
-        window.location.reload();
-      })
-      .catch((error) => {
-        alert("Deletion unsuccessful");
-        console.log(error);
-      });
+      setName(names);
+      setTelephone(telephones);
+      setLocation(locations);
+      setdistrict(districts);
+    });
   }
-
   const handleChange = (event, index) => {
     const value = event.target.value;
     setInputValueArray((prevState) => {
@@ -170,28 +140,17 @@ function Table({ tableName }) {
     });
   };
   ///////// Donor search /////////
-
-  const [dateValue, setDateValue] = useState("");
-  const [typeValue, setTypeValue] = useState("");
-  const [pintsValue, setPintsValue] = useState("");
-  const [rewardValue, setRewardValue] = useState("");
-
-  const handleSubmit = (index, name) => {
+  const handleSubmit = (index, name, NIC) => {
     const startIndex = index * 4;
     const rowValues = inputValueArray.slice(startIndex, startIndex + 4);
-    console.log(`Submit button clicked for index ${index + 1}`);
-    console.log(rowValues[0], rowValues[1], rowValues[2], rowValues[3]);
-
-    setDateValue(rowValues[0] || "");
-    setTypeValue(rowValues[1] || "");
-    setPintsValue(rowValues[2] || "");
-    setRewardValue(rowValues[3] || "");
 
     const formValues = {
       date: rowValues[0] || "",
       type: rowValues[1] || "",
       pints: rowValues[2] || "",
       reward: rowValues[3] || "",
+      name,
+      NIC,
     };
 
     const currentPage = tableName;
@@ -211,23 +170,16 @@ function Table({ tableName }) {
     }));
 
     if (Object.keys(newErrors).length === 0) {
-      console.log(formValues);
-      const newdonation = {
-        name,
-        dateValue,
-        typeValue,
-        pintsValue,
-        rewardValue,
-      };
+      console.log(name, formValues);
       axios
-        .post("http://localhost:8070/donation/add", name, formValues)
+        .post("http://localhost:8070/donation/add", formValues)
         .then(() => {
           alert("donation added to the database");
+          console.log("done " + formValues, name);
         })
         .catch((err) => {
           alert(err);
         });
-      console.log("done " + name, formValues);
     } else {
       alert("error");
     }
@@ -296,7 +248,7 @@ function Table({ tableName }) {
   rows = generateRows(
     tableName,
     inputValueArray,
-    setInputValueArray,
+    // setInputValueArray,
     handleChange,
     handleSubmit,
     errors,
@@ -304,18 +256,39 @@ function Table({ tableName }) {
     name,
     telephone,
     location,
-    acceptbtn,
-    password,
+    // password,
     district,
-    username,
-    id,
-    deletebtn,
+    // username,
+    // id,
+    type,
+    pint,
+    date,
     pbloodbank,
     pHospitals,
     Hospitals,
-    BloodBanks
+    BloodBanks,
+    searchInput,
+    setSearchInput
   );
+  function handleSearchInputChange(e, value) {
+    e.preventDefault();
+    console.log("val " + value);
+    setSearchInput(value);
+    axios.get(`http://localhost:8070/Donor/`).then((response) => {
+      const responseData = response.data;
+      const filteredData = responseData.filter((item) =>
+        item.name.toLowerCase().includes(value.toLowerCase())
+      );
+      const NICs = filteredData.map((item) => item.NIC);
+      const names = filteredData.map((item) => item.name);
+      const telephones = filteredData.map((item) => item.telephone);
+      setNIC(NICs);
+      setName(names);
+      setTelephone(telephones);
+    });
+  }
 
+  // const [searchValue,setsearchValue] = useState("");
   return (
     <div>
       <h2 className="tablename">{tableName}</h2>
@@ -325,7 +298,8 @@ function Table({ tableName }) {
           <input
             type="text"
             className="search"
-            onChange={(e) => setName(e.target.value.toLowerCase())}
+            value={searchInput}
+            onChange={(e) => handleSearchInputChange(e, e.target.value)}
             placeholder="Search . . ."
           />
         )}
@@ -352,13 +326,24 @@ function Table({ tableName }) {
             <button className="submit3">Submit</button>
           </div>
         )}
-        {tableName === TableNames.DONORLOCATION && ( //??//
+        {tableName === TableNames.DONORLOCATION && ( // location search //
           <div className="row-container">
             <div className="dropdown3">
-              <Dropdown dropdown={DropDown.DISTRICTDROPDOWN} />
+              <Dropdown
+                dropdown={DropDown.DISTRICTDROPDOWN}
+                value={dropdownValues.districtdropdown}
+                onChange={(event) =>
+                  handleDropdownChange(event, DropDown.DISTRICTDROPDOWN)
+                }
+              />
             </div>
             <div>
-              <button className="submit2">Submit</button>
+              <button
+                className="submit2"
+                onClick={(e) => locationHandle(e, value)}
+              >
+                Submit
+              </button>
             </div>
           </div>
         )}
@@ -395,7 +380,7 @@ function Table({ tableName }) {
 function generateRows(
   tableName,
   inputValueArray,
-  setInputValueArray,
+  // setInputValueArray,
   handleChange,
   handleSubmit,
   errors,
@@ -403,16 +388,21 @@ function generateRows(
   name,
   telephone,
   location,
-  acceptbtn,
-  password,
+  // acceptbtn,
+  // password,
   district,
-  username,
-  id,
-  deletebtn,
+  // username,
+  // id,
+  // deletebtn,
+  type,
+  pint,
+  date,
   pbloodbank,
   pHospitals,
   Hospitals,
-  BloodBanks
+  BloodBanks,
+  searchInput,
+  setSearchInput
 ) {
   console.log(pbloodbank.length, pHospitals, Hospitals, BloodBanks);
   const rows = [];
@@ -422,18 +412,17 @@ function generateRows(
   // );
 
   if (tableName === TableNames.DONORHISTORY) {
-    const dateValues = ["1/2/12", "8", "8/9/10", "9"];
-    const bloodValues = ["a"];
-    const quantityValues = [1, 2, 3, 3];
+    //////// Donation History  ///////////
     const location = [""];
     const nameofbloodbank = [""];
-    const contactdetails = ["9"];
-    const numRows = 7;
+    const contactdetails = [""];
+    const numRows = type.length;
+    console.log("test 3 " + date, type, pint);
     for (let i = 0; i < numRows; i++) {
       const row = {
-        "DATE OF DONATION": dateValues[i],
-        "BLOOD TYPE": bloodValues[i],
-        "QUANTITY OF BLOOD DONATED IN PINTS": quantityValues[i],
+        "DATE OF DONATION": date[i],
+        "BLOOD TYPE": type[i],
+        "QUANTITY OF BLOOD DONATED IN PINTS": pint[i],
         "NAME OF BLOOD BANK": nameofbloodbank[i],
         "LOCATION OF BLOOD BANK": location[i],
         "CONTACT DETAILS": contactdetails[i],
@@ -441,17 +430,14 @@ function generateRows(
       rows.push(row);
     }
   } else if (tableName === TableNames.DONORLOCATION) {
-    const namebloodbank = ["Narahempital Bloodbank"];
-    const contact = ["0999999", "822222"];
-    const district = [];
-    const address = ["a"];
-    const numRows = 6;
+    /////// blood bank locations /////////
+    const numRows = name.length;
     for (let i = 0; i < numRows; i++) {
       const row = {
-        "NAME OF BLOOD BANK": namebloodbank[i],
-        "CONTACT DETAILS": contact[i],
+        "NAME OF BLOOD BANK": name[i],
+        "CONTACT DETAILS": telephone[i],
         DISTRICT: district[i],
-        ADDRESS: address[i],
+        ADDRESS: location[i],
       };
       rows.push(row);
     }
@@ -524,7 +510,7 @@ function generateRows(
         "CONFIRM CHANGES": (
           <button
             className="submitbutton"
-            onClick={() => handleSubmit(i, name[i])}
+            onClick={() => handleSubmit(i, name[i], NIC[i])}
             type="submit"
           >
             Submit
@@ -534,19 +520,17 @@ function generateRows(
       rows.push(row);
     }
   } else if (tableName === TableNames.BLOODBANKSEARCH) {
-    const name = ["monaragala", "moratuwa"];
+    /////////  Blood bank search  /////////
     const bloodtype = ["a"];
     const quantity = [1, 2, 3, 3];
-    const contactdetails = ["2222"];
-    const location = ["wwwww"];
-    const numberofrows = 3;
+    const numberofrows = name.length;
     for (let i = 0; i < numberofrows; i++) {
       const row = {
         "BLOOD BANK NAME": name[i],
         "BLOOD TYPE": bloodtype[i],
         "AMOUNT OF BLOOD": quantity[i],
         LOCATION: location[i],
-        "CONTACT DETAILS": contactdetails[i],
+        "CONTACT DETAILS": telephone[i],
       };
       rows.push(row);
     }
@@ -623,9 +607,6 @@ function generateRows(
       rows.push(row);
     }
   } else if (tableName === TableNames.HOSPITALACCEPTED) {
-    // const name_b = ["hospital4", "hospital5", "hospital6"];
-    // const telephone_b = ["1212121212", "2323232323", "1212121212"];
-    // const location_b = ["location1", "location2", "location3"];
     const declinebtn_b = (
       <button
         className="declineBtn"
@@ -650,7 +631,11 @@ function generateRows(
     // const name_b = ["bloodbank1", "bloodbank2", "bloodbank3"];
     // const telephone_b = ["1212121212", "2323232323", "1212121212"];
     // const location_b = ["location1", "location2", "location3"];
-    const declinebtn_b = <button className="declineBtn" onClick={()=>{}}>DECLINE</button>;
+    const declinebtn_b = (
+      <button className="declineBtn" onClick={() => {}}>
+        DECLINE
+      </button>
+    );
     const numberofrows = BloodBanks.length;
     for (let i = 0; i < numberofrows; i++) {
       const row = {
@@ -668,7 +653,7 @@ function generateRows(
 async function AcceptOrDecline(username, choice, type) {
   //if possible shud make a windows.refresh to update the new list in the table
   await axios
-    .post(`${Backend_URL}/admin/AcceptOrDecline`, {
+    .post("http://localhost:8070/admin/AcceptOrDecline", {
       username,
       choice,
       type,

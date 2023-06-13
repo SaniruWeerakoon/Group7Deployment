@@ -2,7 +2,7 @@ import React from 'react'
 import { InputFieldName} from "./utils/Enums";
 
 export function validateField(fieldName, value) {
-    if (!value && fieldName !== InputFieldName.DONORADDRESS) {
+    if (!value  ||value.trim() === "") {
       if (fieldName === InputFieldName.LOGINPASSWORD) {
         return "Password is required.";
       }else {
@@ -33,8 +33,8 @@ export function validateField(fieldName, value) {
         !/[a-z]/.test(value) ||
         !/[A-Z]/.test(value) ||
         !/\d/.test(value) ||
-        !/[!@#$%^&*()]/.test(value))||
-        /\s/.test(value)
+        !/[!@#$%^&*()]/.test(value))
+       
     ) {
       return "password should be at least 8 characters long and contain a mix of uppercase, lowercase, digits, and symbols.";
     }
@@ -44,8 +44,8 @@ export function validateField(fieldName, value) {
         !/[a-z]/.test(value) ||
         !/[A-Z]/.test(value) ||
         !/\d/.test(value) ||
-        !/[!@#$%^&*()]/.test(value))||
-        /\s/.test(value)
+        !/[!@#$%^&*()]/.test(value))
+       
     ) {
       return "password should have a maximum of 16 characters.";
     }
