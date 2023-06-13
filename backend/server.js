@@ -15,11 +15,11 @@ app.listen(PORT, () => {
 });
 
 const corsConfig = {
-  origin: "http://localhost:3000", // frontend URL (ReactJS)
+  origin:true, // frontend URL (ReactJS)
   credentials: true,
 };
 app.use(cors(corsConfig));
-app.options(" ", cors(corsConfig));
+app.options("*", cors(corsConfig));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
