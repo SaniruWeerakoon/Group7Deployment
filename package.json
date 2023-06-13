@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://blood-donation-system-client.onrender.com",
   "scripts": {
     "install-server": "cd backend && npm install",
     "start-server": "cd backend && node server.js",
