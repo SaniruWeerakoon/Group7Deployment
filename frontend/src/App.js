@@ -13,8 +13,8 @@ import { UserTypes } from "./utils/Enums";
 import { TableNames } from "./utils/Enums";
 import { FormNames } from "./utils/Enums";
 
-// export const Backend_URL="http://localhost:8070"
-export const Backend_URL="https://blood-donation-system-btsr.onrender.com"
+export const Backend_URL="http://localhost:8070"
+// export const Backend_URL="https://blood-donation-system-btsr.onrender.com"
 
 function App() {
   return (

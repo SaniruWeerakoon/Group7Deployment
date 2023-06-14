@@ -36,8 +36,10 @@ function Dashboards(props) {
       }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
-      const { data } = await axios.post(url, {}, { withCredentials: true });
-      const { status, user } = data;
+      const response = await axios.post(url, {}, { withCredentials: true });
+      console.log(response)
+      console.log(cookies.token)
+      const { status, user } = response.data;
       setUser(user);
       if (status) {
         return;
