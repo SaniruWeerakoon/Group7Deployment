@@ -7,7 +7,6 @@ require("dotenv").config();
 const app = express();
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
-var cookieSession = require('cookie-session')
 
 const PORT = process.env.PORT || 8070;
 
@@ -23,11 +22,7 @@ app.use(cors(corsConfig));
 // app.options("*", cors(corsConfig));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cookieSession({
-  name: 'session',
-  // Cookie Options
-  maxAge: 2 * 60 * 60 * 1000 // 24 hours
-}))
+
 app.use(express.json());
 
 const URL = process.env.MONGODB_URL;

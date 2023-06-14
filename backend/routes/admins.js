@@ -5,7 +5,6 @@ const Cryptr = require("cryptr");
 const cryptr = new Cryptr("ndo9X4Sr6IJRPoPTHh5ogo9vpMWrTI0h"); //secret key
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-var cookieSession = require('cookie-session')
 
 let admin = require("../models/admin");
 const bloodBank = require("../models/bloodBank");
