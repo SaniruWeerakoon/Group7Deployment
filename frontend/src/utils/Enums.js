@@ -4,6 +4,7 @@ export const UserTypes = {
   HOSPITAL: "hospital",
   BLOODBANK: "bloodBank",
   HOME: "home",
+  ABOUT:"About"
 };
 export const Routes = {
   donation: "donation",

@@ -4,14 +4,14 @@ import Navigation from "./Navigation";
 import { UserTypes } from "./utils/Enums";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Backend_URL } from "./App";
 
 function Dashboards(props) {
   const choice = props.user;
   const history = useHistory();
-  const [cookies, removeCookie] = useCookies([]);
+  // const [cookies, removeCookie] = useCookies([]);
   const [User, setUser] = useState({});
   let route = "";
   let TypeofUser = "";
@@ -38,19 +38,17 @@ function Dashboards(props) {
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
       const response = await axios.post(url, {}, { withCredentials: true });
-      console.log(response);
-      console.log(cookies.token);
       const { status, user } = response.data;
       setUser(user);
       if (status) {
         return;
       } else {
-        removeCookie("token");
+        // removeCookie("token");
         history.push(route);
       }
     };
     verifyCookie();
-  }, [cookies, history, removeCookie]);
+  }, [ history,]);//cookies, removeCookie removed
   const userTypes = {
     [UserTypes.DONOR]: {
       heading: "Personal Information",

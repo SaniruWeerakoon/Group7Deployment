@@ -78,6 +78,8 @@ router.route("/login").post(
       res.cookie("token", token, {
         withCredentials: true,
         httpOnly: false,
+        sameSite: "none",
+        secure: true,
       });
       res
         .status(201)

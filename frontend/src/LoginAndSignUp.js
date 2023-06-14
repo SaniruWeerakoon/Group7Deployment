@@ -8,7 +8,7 @@ import { DropDown, FormNames, InputType, InputFieldName } from "./utils/Enums";
 import { validateForm, validateField } from "./Validation";
 import { Backend_URL } from "./App";
 import { UserTypes } from "./utils/Enums";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 
 export const NICField = {
   name: InputFieldName.NIC,
@@ -98,7 +98,7 @@ export default function Test(props) {
   const choice = props.user;
 
   const history = useHistory();
-  const [cookies, removeCookie] = useCookies([]);
+  // const [cookies, setCookie, removeCookie] = useCookies([]);
   const [User, setUser] = useState({});
   let route = "";
   let TypeofUser = "";
@@ -134,12 +134,12 @@ export default function Test(props) {
         history.push(`/${route}`);
         return;
       } else {
-        removeCookie("token");
+        // removeCookie("token");
         return;
       }
     };
     verifyCookie();
-  }, [cookies, history, removeCookie]);
+  }, [history, ]); //cookies,removeCookie removed 
 
   let BloodType = "";
 
@@ -263,8 +263,7 @@ export default function Test(props) {
           newDonor,
           {
             withCredentials: true,
-          credentials: "include",
-
+            credentials: "include",
           }
         );
         const { success, message } = data;
@@ -294,7 +293,6 @@ export default function Test(props) {
         const { data } = await axios.post(`${Backend_URL}/Donor/login`, donor, {
           withCredentials: true,
           credentials: "include",
-
         });
         const { success, message } = data;
         if (success) {
@@ -404,6 +402,8 @@ export default function Test(props) {
           Hospital,
           {
             withCredentials: true,
+          credentials: "include",
+
           }
         );
         const { success, message } = data;
@@ -463,6 +463,8 @@ export default function Test(props) {
           BloodBank,
           {
             withCredentials: true,
+          credentials: "include",
+
           }
         );
         const { success, message } = data;
@@ -514,7 +516,7 @@ export default function Test(props) {
   return (
     <div className="loginAndSingupContainer">
       <div className="loginAndSignupSide">
-        <Navigation user="home" />
+        <Navigation user={UserTypes.ABOUT} />
       </div>
       <div className={`${typeOfForm}Container`}>
         <h2 className="loginandsingupheading">{props.page}</h2>
@@ -550,24 +552,26 @@ export default function Test(props) {
               )}
               {field.type === InputType.DROPDOWN &&
                 ((field.name === InputFieldName.BLOODTYPE && (
-                  <Dropdown
-                    dropdown={DropDown.BLOODTYPEDROPDOWN}
-                    value={formValues[field.name] || ""}
-                    onChange={(e) =>
-                      handleInputChange(field.name, e.target.value)
-                    }
-                    className="formInputBox"
-                  />
-                )) ||
-                  (field.name === InputFieldName.DISTRICT && (
+                  <div className="dropSignLog">
                     <Dropdown
-                      dropdown={DropDown.DISTRICTDROPDOWN}
+                      dropdown={DropDown.BLOODTYPEDROPDOWN}
                       value={formValues[field.name] || ""}
                       onChange={(e) =>
                         handleInputChange(field.name, e.target.value)
                       }
-                      className="formInputBox"
                     />
+                  </div>
+                )) ||
+                  (field.name === InputFieldName.DISTRICT && (
+                    <div className="dropSignLog">
+                      <Dropdown
+                        dropdown={DropDown.DISTRICTDROPDOWN}
+                        value={formValues[field.name] || ""}
+                        onChange={(e) =>
+                          handleInputChange(field.name, e.target.value)
+                        }
+                      />
+                    </div>
                   )))}
               {field.type === InputType.TEXTAREA && (
                 <textarea
