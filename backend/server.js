@@ -15,7 +15,7 @@ app.listen(PORT, () => {
 });
 
 const corsConfig = {
-  origin:"https://group7-deployment.vercel.app/", // frontend URL (ReactJS)
+  origin:"https://group7-deployment.vercel.app", // frontend URL (ReactJS)
   credentials: true,
 };
 app.use(cors(corsConfig));
