@@ -32,7 +32,7 @@ function Dashboards(props) {
     }
     const verifyCookie = async () => {
       if (!cookies.token) {
-        history.push(route);
+        return history.push(route);
       }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
