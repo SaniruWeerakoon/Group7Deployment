@@ -62,7 +62,7 @@ router.route("/login").post(
       const token = createSecretToken(user._id);
       res.cookie("token", token, {
         withCredentials: true,
-        httpOnly: false,
+        httpOnly: true,
       });
       res
         .status(201)
