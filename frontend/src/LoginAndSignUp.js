@@ -349,7 +349,7 @@ export default function Test(props) {
           alert(message);
           setTimeout(() => {
             history.push("/adminDashboard");
-          }, 2000);
+          }, 5000);
         } else {
           alert(message);
         }
