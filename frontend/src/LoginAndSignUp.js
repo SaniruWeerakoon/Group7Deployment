@@ -123,7 +123,7 @@ export default function Test(props) {
       }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
-      const { data } = await axios.post(url, {}, { withCredentials: true });
+      const { data } = await axios.post(url, {}, { withCredentials: true,credentials:'include' });
       const { status, user } = data;
       setUser(user);
       if (status) {

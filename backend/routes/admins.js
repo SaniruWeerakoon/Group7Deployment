@@ -60,11 +60,12 @@ router.route("/login").post(
         return res.json({ message: "Incorrect password or email" });
       }
       const token = createSecretToken(user._id);
-      console.log("login"+token)
+      console.log("login" + token);
       res.cookie("token", token, {
         withCredentials: true,
-        httpOnly: true,
-        
+        httpOnly: false,
+        sameSite: "none",
+        secure: true,
       });
       res
         .status(201)
@@ -78,7 +79,7 @@ router.route("/login").post(
 router.route("/verify").post(
   (adminVerification = (req, res) => {
     const token = req.cookies.token;
-    console.log("verify"+token)
+    console.log("verify" + token);
     if (!token) {
       return res.json({ status: false });
     }
