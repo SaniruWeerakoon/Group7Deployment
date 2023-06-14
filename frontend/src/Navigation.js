@@ -191,20 +191,19 @@ function Navigation(props) {
                     className="link"
                     onClick={(event) => handleDashboard(userType, event)}
                   >
-                    {link.icon && <i className={link.icon}></i>}
+                   <i className={link.icon}></i>
                     {link.label}
                   </a>
                 </li>
               ) : (
                 <li className="lists">
                   <a href={link.href} className="link">
-                    {link.icon && <i className={link.icon}></i>}
+                    <i className={link.icon}></i>
                     {link.label}
                   </a>
                 </li>
               )}
               
-              <hr className="navhr" />
             </React.Fragment>
           ))}
         </ul>

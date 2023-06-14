@@ -493,7 +493,7 @@ export default function Test(props) {
 
     if (Object.keys(newErrors).length === 0) {
       formSubmitted(formValues, props.page);
-      console.log(formValues);
+      // console.log(formValues);
     }
   };
 

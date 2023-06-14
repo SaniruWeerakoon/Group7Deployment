@@ -27,11 +27,11 @@ function Table({ tableName }) {
   const [searchInput, setSearchInput] = useState("");
 
   let user = "";
-  if (tableName == TableNames.DONORHISTORY) {
+  if (tableName === TableNames.DONORHISTORY) {
     user = Routes.donation;
   } else if (
-    tableName == TableNames.DONORLOCATION ||
-    tableName == TableNames.BLOODBANKSEARCH
+    tableName === TableNames.DONORLOCATION ||
+    tableName === TableNames.BLOODBANKSEARCH
   ) {
     user = Routes.bloodBank;
   } else {
@@ -40,7 +40,7 @@ function Table({ tableName }) {
 
   console.log("test " + name);
 
-  useEffect(() => {
+  useEffect( () => {
     console.log("user is " + user);
     if (user === "Donor") {
       axios
@@ -404,7 +404,7 @@ function generateRows(
   searchInput,
   setSearchInput
 ) {
-  console.log(pbloodbank.length, pHospitals, Hospitals, BloodBanks);
+  console.log(pbloodbank, pHospitals, Hospitals, BloodBanks);
   const rows = [];
   let check = 0;
   // const filteredData = username.filter((username) =>
