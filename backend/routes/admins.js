@@ -76,6 +76,7 @@ router.route("/login").post(
 router.route("/verify").post(
   (adminVerification = (req, res) => {
     const token = req.cookies.token;
+    console.log(token)
     if (!token) {
       return res.json({ status: false });
     }
