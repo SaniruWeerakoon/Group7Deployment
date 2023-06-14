@@ -263,6 +263,8 @@ export default function Test(props) {
           newDonor,
           {
             withCredentials: true,
+          credentials: "include",
+
           }
         );
         const { success, message } = data;
@@ -291,6 +293,8 @@ export default function Test(props) {
       try {
         const { data } = await axios.post(`${Backend_URL}/Donor/login`, donor, {
           withCredentials: true,
+          credentials: "include",
+
         });
         const { success, message } = data;
         if (success) {
@@ -349,7 +353,7 @@ export default function Test(props) {
           alert(message);
           setTimeout(() => {
             history.push("/adminDashboard");
-          }, 5000);
+          }, 2000);
         } else {
           alert(message);
         }
