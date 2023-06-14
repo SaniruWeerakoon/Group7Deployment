@@ -31,10 +31,10 @@ function Dashboards(props) {
       TypeofUser = "bloodBank";
     }
     const verifyCookie = async () => {
-      if (!cookies.token) {
-        console.log("here");
-        history.push(route);
-      }
+      // if (!cookies.token) {
+      //   console.log("here");
+      //   history.push(route);
+      // }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
       const response = await axios.post(url, {}, { withCredentials: true });
