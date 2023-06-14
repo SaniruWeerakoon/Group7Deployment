@@ -32,13 +32,14 @@ function Dashboards(props) {
     }
     const verifyCookie = async () => {
       if (!cookies.token) {
-        return history.push(route);
+        console.log("here");
+        history.push(route);
       }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
       const response = await axios.post(url, {}, { withCredentials: true });
-      console.log(response)
-      console.log(cookies.token)
+      console.log(response);
+      console.log(cookies.token);
       const { status, user } = response.data;
       setUser(user);
       if (status) {
@@ -52,46 +53,90 @@ function Dashboards(props) {
   }, [cookies, history, removeCookie]);
   const userTypes = {
     [UserTypes.DONOR]: {
-      heading: 'Personal Information',
-      navigationIcon: 'icon-donor',
+      heading: "Personal Information",
+      navigationIcon: "icon-donor",
       content: [
-        { label: 'NAME', icon: 'fas fa-user', value: User.name },
-        { label: 'DATE OF BIRTH', icon: 'fas fa-calendar-alt', value:User.dob },
-        { label: 'BLOOD TYPE', icon: 'fas fa-tint', value: User.bloodtype },
-        { label: 'TELEPHONE', icon: 'fas fa-phone', value: User.telephone },
-      ]
+        { label: "NAME", icon: "fas fa-user", value: User.name },
+        {
+          label: "DATE OF BIRTH",
+          icon: "fas fa-calendar-alt",
+          value: User.dob,
+        },
+        { label: "BLOOD TYPE", icon: "fas fa-tint", value: User.bloodtype },
+        { label: "TELEPHONE", icon: "fas fa-phone", value: User.telephone },
+      ],
     },
     [UserTypes.ADMIN]: {
-      heading: 'Personal Information',
-      navigationIcon: 'icon-admin',
+      heading: "Personal Information",
+      navigationIcon: "icon-admin",
       content: [
-        { label: 'NAME', icon: 'fas fa-user', value: User.username },
-        { label: 'Number of pending hospital requests', icon: 'fas fa-bolt', value:  User.pendingHosps },
-        { label: 'Number of pending blood bank requests', icon: 'fas fa-bolt', value:  User.pendingBanks },
-        { label: 'Number of accepted hospital requests', icon: 'fas fa-bolt', value:  User.Hosps },
-        { label: 'Number of accepted blood bank requests', icon: 'fas fa-bolt', value:  User.Banks }
-      ]
+        { label: "NAME", icon: "fas fa-user", value: User.username },
+        {
+          label: "Number of pending hospital requests",
+          icon: "fas fa-bolt",
+          value: User.pendingHosps,
+        },
+        {
+          label: "Number of pending blood bank requests",
+          icon: "fas fa-bolt",
+          value: User.pendingBanks,
+        },
+        {
+          label: "Number of accepted hospital requests",
+          icon: "fas fa-bolt",
+          value: User.Hosps,
+        },
+        {
+          label: "Number of accepted blood bank requests",
+          icon: "fas fa-bolt",
+          value: User.Banks,
+        },
+      ],
     },
     [UserTypes.HOSPITAL]: {
-      heading: 'Personal Information',
-      navigationIcon: 'icon-hospital',
+      heading: "Personal Information",
+      navigationIcon: "icon-hospital",
       content: [
-        { label: 'NAME OF HOSPITAL', icon: 'fa fa-hospital', value: User.name },
-        { label: 'ADDRESS', icon: 'fas fa-map-marker-alt', value: User.address },
-        { label: 'TELEPHONE NUMBER', icon: 'fas fa-phone', value: User.telephone },
-        { label: 'DISTRICT OF THE HOSPITAL', icon: 'fa fa-location-arrow', value: User.district }
-      ]
+        { label: "NAME OF HOSPITAL", icon: "fa fa-hospital", value: User.name },
+        {
+          label: "ADDRESS",
+          icon: "fas fa-map-marker-alt",
+          value: User.address,
+        },
+        {
+          label: "TELEPHONE NUMBER",
+          icon: "fas fa-phone",
+          value: User.telephone,
+        },
+        {
+          label: "DISTRICT OF THE HOSPITAL",
+          icon: "fa fa-location-arrow",
+          value: User.district,
+        },
+      ],
     },
     [UserTypes.BLOODBANK]: {
-      heading: 'Personal Information',
-      navigationIcon: 'icon-bloodbank',
+      heading: "Personal Information",
+      navigationIcon: "icon-bloodbank",
       content: [
-        { label: 'NAME OF BLOOD BANK', icon: 'fas fa-hospital', value: User.name },
-        { label: 'DISTRICT OF BLOOD BANK', icon: 'fas fa-location-arrow', value: User.district },
-        { label: 'TELEPHONE', icon: 'fas fa-phone', value:User.telephone },
-        { label: 'ADDRESS', icon: 'fas fa-map-marker-alt', value: User.address }
-      ]
-    }
+        {
+          label: "NAME OF BLOOD BANK",
+          icon: "fas fa-hospital",
+          value: User.name,
+        },
+        {
+          label: "DISTRICT OF BLOOD BANK",
+          icon: "fas fa-location-arrow",
+          value: User.district,
+        },
+        { label: "TELEPHONE", icon: "fas fa-phone", value: User.telephone },
+        {
+          label: "ADDRESS",
+          icon: "fas fa-map-marker-alt",
+          value: User.address,
+        },
+      ],
+    },
   };
 
   const userInfo = userTypes[choice];
@@ -101,21 +146,21 @@ function Dashboards(props) {
       <Navigation user={choice} />
       <h3 className="firstheading">{userInfo.heading}</h3>
       <div className="flex1">
-      {userInfo.content.map((item, index) => (
-  <div className="flex2" key={index}>
-    <div className="flex3">
-      {item.label} <i className={`${item.icon} ${userInfo.navigationIcon}`}></i>
-    </div>
-    <p className="innertext">{item.value}</p>
-  </div>
-      ))}
+        {userInfo.content.map((item, index) => (
+          <div className="flex2" key={index}>
+            <div className="flex3">
+              {item.label}{" "}
+              <i className={`${item.icon} ${userInfo.navigationIcon}`}></i>
+            </div>
+            <p className="innertext">{item.value}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
 export default Dashboards;
-
 
 /*
 import React, { useState , useEffect } from "react";
