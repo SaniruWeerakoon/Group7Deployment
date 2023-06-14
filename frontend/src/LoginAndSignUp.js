@@ -123,7 +123,11 @@ export default function Test(props) {
       }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
-      const { data } = await axios.post(url, {}, { withCredentials: true,credentials:'include' });
+      const { data } = await axios.post(
+        url,
+        {},
+        { withCredentials: true, credentials: "include" }
+      );
       const { status, user } = data;
       setUser(user);
       if (status) {
@@ -287,6 +291,7 @@ export default function Test(props) {
       try {
         const { data } = await axios.post(`${Backend_URL}/Donor/login`, donor, {
           withCredentials: true,
+          credentials: "include",
         });
         const { success, message } = data;
         if (success) {
