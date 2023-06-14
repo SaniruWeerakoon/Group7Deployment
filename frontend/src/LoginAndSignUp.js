@@ -342,6 +342,7 @@ export default function Test(props) {
       try {
         const { data } = await axios.post(`${Backend_URL}/admin/login`, Admin, {
           withCredentials: true,
+          credentials: "include",
         });
         const { success, message } = data;
         if (success) {
