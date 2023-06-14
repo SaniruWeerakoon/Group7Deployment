@@ -118,9 +118,9 @@ export default function Test(props) {
       TypeofUser = "bloodBank";
     }
     const verifyCookie = async () => {
-      if (!cookies.token) {
-        return;
-      }
+      // if (!cookies.token) {
+      //   return;
+      // }
       axios.defaults.withCredentials = true;
       const url = `${Backend_URL}/${TypeofUser}/verify`;
       const { data } = await axios.post(

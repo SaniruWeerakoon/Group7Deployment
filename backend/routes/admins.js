@@ -63,7 +63,7 @@ router.route("/login").post(
       // console.log("login" + token);
       res.cookie("token", token, {
         withCredentials: true,
-        httpOnly: false,
+        httpOnly: true,
         sameSite: "none",
         secure: true,
       });
