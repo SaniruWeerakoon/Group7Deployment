@@ -1,5 +1,5 @@
 import React, {useState,useRef,useEffect} from 'react'
-import './FAQs.css';
+import './Styles/FAQs.css';
 import Navigation from './Navigation';
 
 

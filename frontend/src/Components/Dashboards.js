@@ -1,12 +1,12 @@
 import React from "react";
-import "./Dashboards.css";
+import "./Styles/Dashboards.css";
 import Navigation from "./Navigation";
-import { UserTypes } from "./utils/Enums";
+import { UserTypes } from "../utils/Enums";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 // import { useCookies } from "react-cookie";
 import axios from "axios";
-import { Backend_URL } from "./App";
+import { Backend_URL } from "../App";
 
 function Dashboards(props) {
  const choice = props.user;

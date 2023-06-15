@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "./Navigation";
-import './Donorpoints.css';
-import rewardpic from './images/rewardimage2.png';
+import './Styles/Donorpoints.css';
+import rewardpic from '../images/rewardimage2.png';
 
 
 export default function Donorpoints(props) {

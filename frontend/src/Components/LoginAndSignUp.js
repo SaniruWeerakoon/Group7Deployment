@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Navigation from "./Navigation";
 import Dropdown from "./Dropdown";
-import "./LoginAndSignUp.css";
-import { DropDown, FormNames, InputType, InputFieldName } from "./utils/Enums";
+import "./Styles/LoginAndSignUp.css";
+import { DropDown, FormNames, InputType, InputFieldName } from "../utils/Enums";
 import { validateForm, validateField } from "./Validation";
-import { Backend_URL } from "./App";
-import { UserTypes } from "./utils/Enums";
+import { Backend_URL } from "../App";
+import { UserTypes } from "../utils/Enums";
 // import { useCookies } from "react-cookie";
 
 export const NICField = {

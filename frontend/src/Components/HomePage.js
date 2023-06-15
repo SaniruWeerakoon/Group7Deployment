@@ -1,13 +1,13 @@
 import React,{ useState,useEffect }from 'react';
-import './HomePage.css';
+import './Styles/HomePage.css';
 import Navigation from './Navigation';
-import donorImg from './images/blood.png';
-import bloodLab from './images/homeImage3.webp';
+import donorImg from '../images/blood.png';
+import bloodLab from '../images/homeImage3.webp';
 /*import mainHomeImage from './images/homebackground4.png';*/
-import mainHomeImage from './images/homeImage2.webp';
+import mainHomeImage from '../images/homeImage2.webp';
 /*import donorImage from './images/blood.png';*/
-import donorImage from './images/blood.png';
-import bloodAnimation from './images/bloodAnimation.mp4'
+import donorImage from '../images/blood.png';
+import bloodAnimation from '../images/bloodAnimation.mp4'
 import ReactPlayer from 'react-player';
 
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Navigation.css";
-import profilepic from "./images/common.png";
+import "./Styles/Navigation.css";
+import profilepic from "../images/common.png";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { UserTypes } from "./utils/Enums";
+import { UserTypes } from "../utils/Enums";
 // import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { InputType ,InputFieldName } from "./utils/Enums";
+import { InputType ,InputFieldName } from "../utils/Enums";
   
   export const NICField =  
      { name: InputFieldName.NIC, 

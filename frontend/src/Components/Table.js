@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./Table.css";
+import "./Styles/Table.css";
 import Dropdown from "./Dropdown";
-import { TableNames, Routes } from "./utils/Enums";
-import { DropDown } from "./utils/Enums";
+import { TableNames, Routes } from "../utils/Enums";
+import { DropDown } from "../utils/Enums";
 import { validateForm, validateField } from "./Validation";
 import axios from "axios";
-import { Backend_URL } from "./App";
+import { Backend_URL } from "../App";
 
 function Table({ tableName }) {
   const [value, setValue] = useState("");

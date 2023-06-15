@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Navigation from "./Navigation";
-import LoginAndSignUp from "./LoginAndSignUp";
-import HomePage from "./HomePage";
-import FAQs from "./FAQs";
-import Table from "./Table";
-import Dashboards from "./Dashboards";
-import Donorpoints from "./Donorpoints";
-import BloodCountChart from "./BloodCountChart";
-import About from "./About";
+import Navigation from "./Components/Navigation"
+import LoginAndSignUp from "./Components/LoginAndSignUp";
+// import HomePage from "./HomePage";
+import FAQs from "./Components/FAQs";
+import Table from "./Components/Table";
+import Dashboards from "./Components/Dashboards";
+import Donorpoints from "./Components/Donorpoints";
+import BloodCountChart from "./Components/BloodCountChart";
+import About from "./Components/About";
 import { UserTypes } from "./utils/Enums";
 
 import { TableNames } from "./utils/Enums";

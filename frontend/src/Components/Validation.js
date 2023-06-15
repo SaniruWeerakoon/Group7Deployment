@@ -1,5 +1,5 @@
-import React from 'react'
-import { InputFieldName} from "./utils/Enums";
+// import React from 'react'
+import { InputFieldName} from "../utils/Enums";
 
 export function validateField(fieldName, value) {
     if (!value  ||value.trim() === "") {
