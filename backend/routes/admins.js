@@ -108,7 +108,6 @@ router.route("/verify").post(
 );
 
 router.route("/").get(async (req, res) => {
-  const type=req.body.type;
   let pendingH = [];
   let pendingBB = [];
   let Hosps = [];

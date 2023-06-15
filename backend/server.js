@@ -15,6 +15,7 @@ app.listen(PORT, () => {
 });
 
 const corsConfig = {
+  // origin:true,
   origin:"https://group7-deployment.vercel.app", // frontend URL (ReactJS)
   credentials: true,
 };
@@ -37,7 +38,7 @@ connection.once("open", () => {
   console.log("Mongodb Connection Success ");
 });
 app.get("/", (req, res) => {
-  res.status(201).json({ message: "Connected to Backend!" });
+  res.status(200).json({ message: "Connection Live" });
 });
 const donorRouter = require("./routes/donors.js");
 app.use("/Donor", donorRouter);
@@ -50,3 +51,5 @@ app.use("/hospital", hospitalRouter);
 
 const adminRouter = require("./routes/admins.js");
 app.use("/admin", adminRouter);
+
+module.exports=app

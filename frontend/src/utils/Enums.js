@@ -7,10 +7,11 @@ export const UserTypes = {
   ABOUT:"About"
 };
 export const Routes = {
-  donation: "donation",
-  bloodBank: "bloodBank",
-  Donor: "Donor",
-  admin: "admin",
+  donation:"donation",
+  bloodBank:"bloodBank",
+  Donor:"Donor",
+  admin:"admin",
+  hospital:"hospital"
 };
 
 export const TableNames = {

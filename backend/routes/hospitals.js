@@ -121,5 +121,79 @@ router.route("/verify").post(
   })
 );
 
+router.put("/update/:username", async (req, res) => {
+  const username = req.params.username;
+  const {
+    oPositive,
+    oNegative,
+    aPositive,
+    aNegative,
+    bPositive,
+    bNegative,
+    abPositive,
+    abNegative,
+  } = req.body;
 
+  try {
+    const updatedblood = await hospital.findOneAndUpdate(
+      { username }, // Find the blood by name
+      {
+        oPositive,
+        oNegative,
+        aPositive,
+        aNegative,
+        bPositive,
+        bNegative,
+        abPositive,
+        abNegative,
+      }, // Update the fields
+      { new: true } // Return the updated blood object
+    );
+    res.status(200).send({ status: "blood updated", data: updatedblood });
+  } catch (err) {
+    res.status(500).send({ status: "Error", error: err.message });
+  }
+});
+router.route("/").get(async (req, res) => {
+  //get hospital info
+  const user = await hospital.find();
+  const hospitals = [];
+  for (let i = 0; i < user.length; i++) {
+    const id = user[i]._id;
+    const username = user[i].username;
+    const password = user[i].password;
+    const name = cryptr.decrypt(user[i].name);
+    const telephone = cryptr.decrypt(user[i].telephone);
+    const address = cryptr.decrypt(user[i].address);
+    const district = cryptr.decrypt(user[i].district);
+
+        const oPositive = user[i].oPositive;
+        const aPositive = user[i].aPositive;
+        const bPositive = user[i].bPositive;
+        const abPositive = user[i].abPositive;
+        const oNegative = user[i].oNegative;
+        const aNegative = user[i].aNegative;
+        const bNegative = user[i].bNegative;
+        const abNegative = user[i].abNegative;
+
+    hospitals.push({
+      id,
+      username,
+      password,
+      name,
+      telephone,
+      address,
+      district,
+      oPositive,
+      oNegative,
+      aPositive,
+      aNegative,
+      bNegative,
+      bPositive,
+      abNegative,
+      abPositive,
+    });
+  }
+  res.json(hospitals);
+});
 module.exports = router;

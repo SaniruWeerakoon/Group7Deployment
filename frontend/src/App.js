@@ -49,11 +49,11 @@ function App() {
       </Route>
       <Route path="/bloodBankChart">
         <Navigation user={UserTypes.BLOODBANK} />
-        <BloodCountChart />
+        <BloodCountChart user={UserTypes.BLOODBANK}/>
       </Route>
       <Route path="/hospitalChart">
         <Navigation user={UserTypes.HOSPITAL} />
-        <BloodCountChart />
+        <BloodCountChart user={UserTypes.HOSPITAL}  />
       </Route>
 
       <Route path="/donorLoginPage">

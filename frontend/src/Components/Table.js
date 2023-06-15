@@ -6,15 +6,12 @@ import { DropDown } from "../utils/Enums";
 import { validateForm, validateField } from "./Validation";
 import axios from "axios";
 import { Backend_URL } from "../App";
-
 function Table({ tableName }) {
   const [value, setValue] = useState("");
-  const [id, setId] = useState([]);
   const [name, setName] = useState([]);
   const [NIC, setNIC] = useState([]);
   const [telephone, setTelephone] = useState([]);
   const [location, setLocation] = useState([]);
-  const [password, setpassword] = useState([]);
   const [username, setusername] = useState([]);
   const [district, setdistrict] = useState([]);
   const [pbloodbank, setpbloodbank] = useState([]);
@@ -27,59 +24,121 @@ function Table({ tableName }) {
   const [searchInput, setSearchInput] = useState("");
 
   let user = "";
-  if (tableName === TableNames.DONORHISTORY) {
+  if (tableName == TableNames.DONORHISTORY) {
     user = Routes.donation;
   } else if (
-    tableName === TableNames.DONORLOCATION ||
-    tableName === TableNames.BLOODBANKSEARCH
+    tableName == TableNames.DONORLOCATION ||
+    tableName == TableNames.BLOODBANKSEARCH
   ) {
     user = Routes.bloodBank;
   } else {
     user = Routes.admin;
   }
+  let newusername = "Bank05";
+  const [oPositive, setOpositive] = useState([]);
+  const [oNegative, setONegative] = useState([]);
+  const [aPositive, setApositive] = useState([]);
+  const [aNegative, setANegative] = useState([]);
+  const [bPositive, setBpositive] = useState([]);
+  const [bNegative, setBNegative] = useState([]);
+  const [abPositive, setABpositive] = useState([]);
+  const [abNegative, setABNegative] = useState([]);
 
-  console.log("test " + name);
+  const [donationUsername, setdonationUsername] = useState("");
+  const [donationTelephone, setdonationTelephone] = useState("");
+  const [donationLocation, setdonationLocation] = useState("");
+  const [data, setData] = useState([]);
 
-  useEffect( () => {
-    console.log("user is " + user);
-    if (user === "Donor") {
+  if (tableName === TableNames.DONORSEARCH) {
+    axios
+      .get(`${Backend_URL}/bloodBank/`)
+      .then((response) => {
+        setData(response.data);
+        const donationUser = response.data.find(
+          (blood) => blood.username === newusername
+        );
+        if (donationUser) {
+          setdonationUsername(donationUser.username);
+          setdonationTelephone(donationUser.telephone);
+          setdonationLocation(donationUser.address);
+        } else {
+          console.log("not found");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  useEffect(() => {
+    if (user === Routes.bloodBank) {
       axios
-        .get(`${Backend_URL}/Donor/`)
+        .get(`${Backend_URL}/${user}/`)
         .then((response) => {
           const responseData = response.data;
-          const NICs = responseData.map((item) => item.NIC);
+          const districts = responseData.map((item) => item.district);
+          const ids = responseData.map((item) => item.id);
           const names = responseData.map((item) => item.name);
           const telephones = responseData.map((item) => item.telephone);
+          const locations = responseData.map((item) => item.address);
+          const usernames = responseData.map((item) => item.username);
 
-          setNIC(NICs);
+          const oPos = responseData.map((item) => item.oPositive);
+          const aPos = responseData.map((item) => item.aPositive);
+          const bPos = responseData.map((item) => item.bPositive);
+          const abPos = responseData.map((item) => item.abPositive);
+          const oNegs = responseData.map((item) => item.oNegative);
+          const aNegs = responseData.map((item) => item.aNegative);
+          const bNegs = responseData.map((item) => item.bNegative);
+          const abNegs = responseData.map((item) => item.abNegative);
+
+          setOpositive(oPos);
+          setONegative(oNegs);
+          setApositive(aPos);
+          setANegative(aNegs);
+          setBpositive(bPos);
+          setBNegative(bNegs);
+          setABpositive(abPos);
+          setABNegative(abNegs);
+
+          // setId(ids);
           setName(names);
           setTelephone(telephones);
+          setLocation(locations);
+          setusername(usernames);
+          setdistrict(districts);
         })
         .catch((error) => {
           console.log("Error fetching data:", error);
         });
-    } else if (user === "BloodBank" || user === "Hospital") {
-      axios.get(`${Backend_URL}/${user}/`).then((response) => {
-        const responseData = response.data;
-        const ids = responseData.map((item) => item.id);
-        const names = responseData.map((item) => item.name);
-        const telephones = responseData.map((item) => item.telephone);
-        const locations = responseData.map((item) => item.address);
-        const usernames = responseData.map((item) => item.username);
-        const districts = responseData.map((item) => item.district);
-        const passwords = responseData.map((item) => item.password);
+    } else if (user === Routes.donation) {
+      axios
+        .get(`${Backend_URL}/${user}/`)
+        .then((response) => {
+          const responseData = response.data;
 
-        setId(ids);
-        setName(names);
-        setTelephone(telephones);
-        setLocation(locations);
-        setusername(usernames);
-        setdistrict(districts);
-        setpassword(passwords);
+          const names = responseData.map((item) => item.name);
+          const filteredData = responseData.filter(
+            (item) => item.name === newusername
+          );
+          const dates = filteredData.map((item) => item.date);
+          const pints = filteredData.map((item) => item.pints);
+          const locations = filteredData.map((item) => item.donationLocation);
+          const types = filteredData.map((item) => item.type);
+          const usernames = responseData.map((item) => item.donationUsername);
+          const telephones = responseData.map((item) => item.telephone);
 
-        console.log("test2 ");
-      });
-    } else if (user === "admin") {
+          setTelephone(telephones);
+          setusername(usernames);
+          setName(names);
+          setDate(dates);
+          setPint(pints);
+          setLocation(locations);
+          setType(types);
+        })
+        .catch((error) => {
+          console.log("Error fetching data:", error);
+        });
+    } else if ((user = Routes.admin)) {
       axios.get(`${Backend_URL}/admin/`).then((response) => {
         const responseData = response.data;
         const pendingBB = responseData.pendingBB;
@@ -93,9 +152,6 @@ function Table({ tableName }) {
       });
     }
   }, []);
-  console.log("test " + name);
-  console.log("test2 " + type, date, pint);
-
   ///////
   const [inputValueArray, setInputValueArray] = useState([]);
   const [errors, setErrors] = useState({});
@@ -103,6 +159,8 @@ function Table({ tableName }) {
     bloodtypedropdown: "",
     districtdropdown: "",
   });
+  const [selecteddistrict, setselecteddistrict] = useState("");
+  const [selectedblood, setselectedblood] = useState("");
   const handleDropdownChange = (event, dropdownName) => {
     const selectedValue = event.target.value;
     setDropdownValues((prevState) => ({
@@ -110,12 +168,36 @@ function Table({ tableName }) {
       [dropdownName]: value,
     }));
     setValue(selectedValue);
+    if (dropdownName === DropDown.DISTRICTDROPDOWN) {
+      setselecteddistrict(selectedValue);
+    } else if (dropdownName === "bloodtypedropdown") {
+      setselectedblood(selectedValue);
+    }
   };
+  const [blood, setBlood] = useState([]);
+  function bankSearch(e) {
+    e.preventDefault();
+    axios.get(`${Backend_URL}/${Routes.bloodBank}/`).then((response) => {
+      const responseData = response.data;
+      const filteredData = responseData.filter(
+        (item) => item.district === selecteddistrict
+      );
+      const bloods = filteredData.map((item) => item[selectedblood]);
+      const districts = filteredData.map((item) => item.district);
+      const names = filteredData.map((item) => item.name);
+      const telephones = filteredData.map((item) => item.telephone);
+      const locations = filteredData.map((item) => item.address);
 
+      setdistrict(districts);
+      setName(names);
+      setTelephone(telephones);
+      setLocation(locations);
+      setBlood(bloods);
+    });
+  }
   function locationHandle(e, value) {
     e.preventDefault();
-    console.log("district " + value);
-    axios.get(`http://localhost:8070/${user}/`).then((response) => {
+    axios.get(`${Backend_URL}/${user}/`).then((response) => {
       const responseData = response.data;
       const filteredData = responseData.filter(
         (item) => item.district === value
@@ -151,8 +233,11 @@ function Table({ tableName }) {
       reward: rowValues[3] || "",
       name,
       NIC,
+      donationUsername,
+      donationLocation,
+      donationTelephone,
     };
-
+    console.log("//////" + donationLocation, donationUsername);
     const currentPage = tableName;
 
     const forms = [
@@ -170,12 +255,17 @@ function Table({ tableName }) {
     }));
 
     if (Object.keys(newErrors).length === 0) {
-      console.log(name, formValues);
       axios
-        .post("http://localhost:8070/donation/add", formValues)
+        .post(`${Backend_URL}/donation/add`, formValues)
         .then(() => {
           alert("donation added to the database");
-          console.log("done " + formValues, name);
+          console.log(
+            "done " + formValues,
+            name,
+            donationUsername,
+            donationLocation,
+            donationTelephone
+          );
         })
         .catch((err) => {
           alert(err);
@@ -248,7 +338,6 @@ function Table({ tableName }) {
   rows = generateRows(
     tableName,
     inputValueArray,
-    // setInputValueArray,
     handleChange,
     handleSubmit,
     errors,
@@ -256,10 +345,7 @@ function Table({ tableName }) {
     name,
     telephone,
     location,
-    // password,
     district,
-    // username,
-    // id,
     type,
     pint,
     date,
@@ -267,14 +353,16 @@ function Table({ tableName }) {
     pHospitals,
     Hospitals,
     BloodBanks,
+    blood,
+    selectedblood,
+    username,
     searchInput,
     setSearchInput
   );
   function handleSearchInputChange(e, value) {
     e.preventDefault();
-    console.log("val " + value);
     setSearchInput(value);
-    axios.get(`http://localhost:8070/Donor/`).then((response) => {
+    axios.get(`${Backend_URL}/Donor/`).then((response) => {
       const responseData = response.data;
       const filteredData = responseData.filter((item) =>
         item.name.toLowerCase().includes(value.toLowerCase())
@@ -287,7 +375,6 @@ function Table({ tableName }) {
       setTelephone(telephones);
     });
   }
-
   // const [searchValue,setsearchValue] = useState("");
   return (
     <div>
@@ -300,10 +387,10 @@ function Table({ tableName }) {
             className="search"
             value={searchInput}
             onChange={(e) => handleSearchInputChange(e, e.target.value)}
-            placeholder="Search . . ."
+            placeholder="Please type a donor name..."
           />
         )}
-        {tableName === TableNames.BLOODBANKSEARCH && ( //?//
+        {tableName === TableNames.BLOODBANKSEARCH && ( //// Blood bank search //
           <div className="row-container">
             <div className="dropdown5">
               <Dropdown
@@ -323,7 +410,9 @@ function Table({ tableName }) {
                 }
               />
             </div>
-            <button className="submit3">Submit</button>
+            <button className="submit3" onClick={(e) => bankSearch(e)}>
+              Submit
+            </button>
           </div>
         )}
         {tableName === TableNames.DONORLOCATION && ( // location search //
@@ -364,7 +453,9 @@ function Table({ tableName }) {
                 {rows.map((row, rowindex) => (
                   <tr key={rowindex}>
                     {Object.values(row).map((cell, cellindex) => (
-                      <td key={cellindex}>{cell}</td>
+                      <td key={cellindex}>
+                        <div className="multiline-cell">{cell}</div>
+                      </td>
                     ))}
                   </tr>
                 ))}
@@ -380,7 +471,6 @@ function Table({ tableName }) {
 function generateRows(
   tableName,
   inputValueArray,
-  // setInputValueArray,
   handleChange,
   handleSubmit,
   errors,
@@ -388,12 +478,7 @@ function generateRows(
   name,
   telephone,
   location,
-  // acceptbtn,
-  // password,
   district,
-  // username,
-  // id,
-  // deletebtn,
   type,
   pint,
   date,
@@ -401,10 +486,12 @@ function generateRows(
   pHospitals,
   Hospitals,
   BloodBanks,
+  blood,
+  selectedblood,
+  username,
   searchInput,
   setSearchInput
 ) {
-  console.log(pbloodbank, pHospitals, Hospitals, BloodBanks);
   const rows = [];
   let check = 0;
   // const filteredData = username.filter((username) =>
@@ -413,19 +500,15 @@ function generateRows(
 
   if (tableName === TableNames.DONORHISTORY) {
     //////// Donation History  ///////////
-    const location = [""];
-    const nameofbloodbank = [""];
-    const contactdetails = [""];
     const numRows = type.length;
-    console.log("test 3 " + date, type, pint);
     for (let i = 0; i < numRows; i++) {
       const row = {
         "DATE OF DONATION": date[i],
         "BLOOD TYPE": type[i],
         "QUANTITY OF BLOOD DONATED IN PINTS": pint[i],
-        "NAME OF BLOOD BANK": nameofbloodbank[i],
+        "NAME OF BLOOD BANK": username[i],
         "LOCATION OF BLOOD BANK": location[i],
-        "CONTACT DETAILS": contactdetails[i],
+        "CONTACT DETAILS": telephone[i],
       };
       rows.push(row);
     }
@@ -521,15 +604,13 @@ function generateRows(
     }
   } else if (tableName === TableNames.BLOODBANKSEARCH) {
     /////////  Blood bank search  /////////
-    const bloodtype = ["a"];
-    const quantity = [1, 2, 3, 3];
     const numberofrows = name.length;
     for (let i = 0; i < numberofrows; i++) {
       const row = {
         "BLOOD BANK NAME": name[i],
-        "BLOOD TYPE": bloodtype[i],
-        "AMOUNT OF BLOOD": quantity[i],
-        LOCATION: location[i],
+        "BLOOD TYPE": selectedblood,
+        "AMOUNT OF BLOOD": blood[i],
+        LOCATION: district[i],
         "CONTACT DETAILS": telephone[i],
       };
       rows.push(row);
@@ -628,9 +709,6 @@ function generateRows(
       rows.push(row);
     }
   } else if (tableName === TableNames.BLOODBANKACCEPTED) {
-    // const name_b = ["bloodbank1", "bloodbank2", "bloodbank3"];
-    // const telephone_b = ["1212121212", "2323232323", "1212121212"];
-    // const location_b = ["location1", "location2", "location3"];
     const declinebtn_b = (
       <button className="declineBtn" onClick={() => {}}>
         DECLINE
@@ -653,7 +731,7 @@ function generateRows(
 async function AcceptOrDecline(username, choice, type) {
   //if possible shud make a windows.refresh to update the new list in the table
   await axios
-    .post("http://localhost:8070/admin/AcceptOrDecline", {
+    .post(`${Backend_URL}/admin/AcceptOrDecline`, {
       username,
       choice,
       type,
@@ -661,6 +739,7 @@ async function AcceptOrDecline(username, choice, type) {
     .then((response) => {
       if (response.data.success === true) {
         console.log("Successful");
+        window.location.reload();
       } else {
         console.log("Unsuccessful");
       }
